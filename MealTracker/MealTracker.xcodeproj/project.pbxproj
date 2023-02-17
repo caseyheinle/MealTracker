@@ -15,6 +15,7 @@
 		FA1915FF299FF0F200986C8B /* MealTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1915FE299FF0F200986C8B /* MealTrackerUITests.swift */; };
 		FA191601299FF0F200986C8B /* MealTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA191600299FF0F200986C8B /* MealTrackerUITestsLaunchTests.swift */; };
 		FA19160E299FF45800986C8B /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19160D299FF45800986C8B /* Meal.swift */; };
+		FA19161229A02CE200986C8B /* MealList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19161129A02CE200986C8B /* MealList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		FA1915FE299FF0F200986C8B /* MealTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTrackerUITests.swift; sourceTree = "<group>"; };
 		FA191600299FF0F200986C8B /* MealTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FA19160D299FF45800986C8B /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		FA19161129A02CE200986C8B /* MealList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				FA1915E8299FF0F200986C8B /* MealTracker.entitlements */,
 				FA1915E9299FF0F200986C8B /* Preview Content */,
 				FA19160D299FF45800986C8B /* Meal.swift */,
+				FA19161129A02CE200986C8B /* MealList.swift */,
 			);
 			path = MealTracker;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA19161229A02CE200986C8B /* MealList.swift in Sources */,
 				FA1915E5299FF0F200986C8B /* ContentView.swift in Sources */,
 				FA19160E299FF45800986C8B /* Meal.swift in Sources */,
 				FA1915E3299FF0F200986C8B /* MealTrackerApp.swift in Sources */,
