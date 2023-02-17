@@ -16,6 +16,8 @@ struct ContentView: View {
             Text("Welcome to Meal Tracker!")
         }
         .padding()
+        
+        MealList(meals: .exampleMeal)
     }
 }
 
