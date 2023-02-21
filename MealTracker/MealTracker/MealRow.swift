@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MealRow: View {
-    let meal: Meal
+    @Binding var meal: Meal
     
     var body: some View {
         VStack {

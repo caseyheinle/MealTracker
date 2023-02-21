@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct MealList: View {
-    let meals: [Meal]
+    @Binding var meals: [Meal]
+    
     var body: some View {
-        List(meals) { meal in
-            MealRow(meal: meal)
+        ZStack {
+            List($meals) { $meal in
+                MealRow(meal: $meal)
+            }
         }
     }
 }
 
 struct MealList_Previews: PreviewProvider {
     static var previews: some View {
-        MealList(meals: .exampleMeal)
     }
 }
