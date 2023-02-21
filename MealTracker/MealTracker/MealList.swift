@@ -11,12 +11,12 @@ struct MealList: View {
     let meals: [Meal]
     var body: some View {
         List(meals) { meal in
-            MealRow(meal: meal)
+            MealInformation(meal: meal)
         }
     }
 }
 
-struct MealRow: View {
+struct MealInformation: View {
     let meal: Meal
     
     var body: some View {
