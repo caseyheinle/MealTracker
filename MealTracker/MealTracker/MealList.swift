@@ -21,12 +21,21 @@ struct MealRow: View {
     
     var body: some View {
         HStack {
-            Text(meal.typeOfMeal.rawValue)
+            Text(meal.typeOfMeal.rawValue)   
+        }
+        HStack {
             Text(meal.mealName)
-//            Text(meal.ingredientList[0].rawValue)
-//            Text(meal.dateOfMeal.formatted(Date()))
-//            Text(meal.completedMeal.rawValue)
-            
+        }
+        VStack {
+            ForEach(meal.ingredientList, id: \.self) { ingredient in
+                Text(ingredient)
+            }
+        }
+        HStack {
+            Text(formatDate(date: meal.dateOfMeal))
+        }
+        HStack {
+            Text(meal.completedMeal ? "True": "False")
         }
     }
 }
@@ -35,4 +44,10 @@ struct MealList_Previews: PreviewProvider {
     static var previews: some View {
         MealList(meals: .exampleMeal)
     }
+}
+
+func formatDate(date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "YYYY/MM/dd"
+    return formatter.string(from: date)
 }
