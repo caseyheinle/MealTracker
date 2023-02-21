@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var meals = [Meal].exampleMeal
     var body: some View {
         VStack {
             Image(systemName: "fork.knife")
@@ -17,7 +18,7 @@ struct ContentView: View {
         }
         .padding()
         
-        MealList(meals: .exampleMeal)
+        MealList(meals: $meals)
     }
 }
 
