@@ -32,7 +32,7 @@ struct Meal: Identifiable, Codable {
 extension Array where Element == Meal {
     static var exampleMeal: Self {
         [
-        .init(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal"], completedMeal: true)
+        .init(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
         ]
     }
 }
