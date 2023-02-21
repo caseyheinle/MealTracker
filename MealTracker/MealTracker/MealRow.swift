@@ -19,11 +19,6 @@ struct MealRow: View {
             }
             Text(formatDate(date: meal.dateOfMeal))
             Text(meal.completedMeal ? "True": "False")
-            
-            Button("Add New Meal", action: {
-                //let newMeal = Meal(<#T##typeOfMeal: MealType##MealType#>, mealName: <#T##String#>, dateOfMeal: <#T##Date#>, ingredientList: <#T##[String]#>, completedMeal: <#T##Bool#>)
-                //MealRow.append(newMeal)
-            })
         }
     }
 }
