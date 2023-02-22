@@ -9,28 +9,41 @@ import SwiftUI
 
 struct MealList: View {
     @Binding var meals: [Meal]
+//    @Binding var showAlert: Bool
+   // @Binding var mealName = ""
     
     var body: some View {
-        ZStack {
+//        ZStack {
             List($meals) { $meal in
                 MealRow(meal: $meal)
+//                Text("Hello")
+                Button("Delete", action: {
+                    meals.removeAll(where: {$0.id == $meal.id})
+                })
             }
-            Button("Add New Meal", action: {
-                let newMeal = Meal(MealType.Lunch, mealName: "Added via New Meal Button", dateOfMeal: Date(), ingredientList: ["String"], completedMeal: true)
-                meals.append(newMeal)
-            }).frame(maxHeight: .infinity, alignment: .bottom)
-        }
+//        }
     }
 }
 
-struct MealList_Previews: PreviewProvider {
-    struct DemoView: View {
-        @State var meals = [Meal].exampleMeal
-        var body: some View {
-            MealList(meals: $meals)
-        }
+func presentAlertController() {
+    let alertController = UIAlertController(title: "Add New Meal", message: nil, preferredStyle: .alert)
+    alertController.addTextField { (mealName) in
+        mealName.placeholder = "Meal Name"
     }
-    static var previews: some View {
-        DemoView()
+    let addAction = UIAlertAction(title: "Add", style: .default) { (action) in
+//        if let mealName = alertController.textFields?.first, let mealName = mealName.text { }
     }
+    alertController.addAction(addAction)
+    //present(alertController, animated: true, completion: nil)
 }
+
+//    struct DemoView: View {
+//        @State var meals = [Meal].exampleMeal
+//        var body: some View {
+//            MealList(meals: $meals, showAlert: $showAlert)
+//        }
+//    }
+//    static var previews: some View {
+//        DemoView()
+//    }
+//}

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MealRow: View {
     @Binding var meal: Meal
+    @State private var editing = false
     
     var body: some View {
         VStack {
@@ -19,7 +20,15 @@ struct MealRow: View {
             }
             Text(formatDate(date: meal.dateOfMeal))
             Text(meal.completedMeal ? "True": "False")
+            Button("Edit", action: {
+                self.editing.toggle()
+                
+            })
+            .sheet(isPresented: $editing) {
+                EditMealView(meal:$meal)
+            }
         }
+
     }
 }
 

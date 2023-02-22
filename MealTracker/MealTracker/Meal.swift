@@ -8,7 +8,7 @@
 import Foundation
 
 // codable because I need to store this. Identifiable so I can specifically reference this meal
-struct Meal: Identifiable, Codable {
+struct Meal: Identifiable, Codable, Equatable, Hashable {
     let id = UUID() // I want to be able to reference each unique meal
     
     var typeOfMeal: MealType
@@ -26,13 +26,22 @@ struct Meal: Identifiable, Codable {
         self.dateOfMeal = Date()
         self.completedMeal = completedMeal
     }
+    
+    static let `default` = Meal(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
+    static let `default1` = Meal(MealType.Breakfast, mealName: "eggs", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
+    static func newMeal() -> Meal {
+        Meal(MealType.Breakfast, mealName: "hsm", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
+    }
 }
 
 // start with an example meal for display/test purposes
 extension Array where Element == Meal {
     static var exampleMeal: Self {
         [
-        .init(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
+            .default,
+//            .default1,
+//            .default2
+//        .init(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
         ]
     }
 }

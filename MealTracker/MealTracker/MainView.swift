@@ -9,15 +9,15 @@ import SwiftUI
 
 struct MainView: View {
     @Binding var meals: [Meal]
-//    @State private var showAlert: Bool = false
+    @State private var showingSheet: Bool = false
 //    @State var typeOfMeal = ""
 //    @State var mealName = ""
 //    @State var mealName = ""
 //    @State var mealName = ""
 //    @State var mealName = ""
-    init(meals: [Meal]) {
-        self.meals = meals
-    }
+
+    @State private var newMeal = Meal.newMeal()
+    @State private var created = false
     
     var body: some View {
         VStack {
@@ -25,17 +25,23 @@ struct MainView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Welcome to Meal Tracker!")
-            Text("Welcome to Meal Tracker \(self.meals.count)")
+            MealList(meals: $meals)
+            Button("Add New Meal 3", action: {
+                self.showingSheet.toggle()
+            }).frame(maxHeight: 44, alignment: .bottom)
+
         }
         .padding()
-        
-        MealList(meals: $meals, showAlert: true)
-//            .alert("Add New Meal", isPresented: $showAlert) {
-//                TextField("Select the meal type", text: $typeOfMeal)
-//                TextField("Enter the name of the meal", text: $mealName)
-                //TextField("Ent")
-//                Button("Add", action: addNewMeal)
-//            }
+        .sheet(isPresented: $showingSheet) {
+            AddtMealView(meal: $newMeal, created: $created)
+        }
+        .onChange(of: created) { created in
+            if created {
+                self.meals.append(self.newMeal)
+            }
+            self.created = false
+            self.newMeal = Meal.newMeal()
+        }
     }
 }
 
@@ -43,8 +49,43 @@ func addNewMeal() {
     print("persist entered stuff here")
 }
 
-struct MealListView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView(meals: [Meal].exampleMeal)
+//struct MealListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView(meals: [Meal].exampleMeal)
+//    }
+//}
+
+struct AddtMealView: View {
+    @Environment(\.dismiss) var dismiss
+    @Binding var meal: Meal
+    @Binding var created: Bool
+
+    var body: some View {
+//        TextField("Select the meal type", text: $meal.typeOfMeal)
+        TextField("Enter the name of the meal", text: $meal.mealName)
+        Button("Press to dismiss") {
+            dismiss()
+        }
+        Button("CREATE") {
+            self.created = true
+            dismiss()
+        }
+//        .font(.title)
+//        .padding()
+    }
+}
+
+struct EditMealView: View {
+    @Environment(\.dismiss) var dismiss
+    @Binding var meal: Meal
+
+    var body: some View {
+//        TextField("Select the meal type", text: $meal.typeOfMeal)
+        TextField("Enter the name of the meal", text: $meal.mealName)
+        Button("Press to dismiss") {
+            dismiss()
+        }
+        .font(.title)
+        .padding()
     }
 }
