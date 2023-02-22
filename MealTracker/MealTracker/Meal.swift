@@ -41,7 +41,6 @@ extension Array where Element == Meal {
             .default,
 //            .default1,
 //            .default2
-//        .init(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
         ]
     }
 }

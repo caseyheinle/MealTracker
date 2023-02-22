@@ -21,7 +21,6 @@ struct MealTrackerApp: App {
     }
 }
 
-
 /*
  app
     main view
