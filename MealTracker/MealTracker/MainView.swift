@@ -20,7 +20,7 @@ struct MainView: View {
                 .foregroundColor(.accentColor)
             Text("Welcome to Meal Tracker!")
             MealList(meals: $meals)
-            Button("Add New Meal 3", action: {
+            Button("Add New Meal", action: {
                 self.showingSheet.toggle()
             }).frame(maxHeight: 44, alignment: .bottom)
             
@@ -37,10 +37,6 @@ struct MainView: View {
             self.newMeal = Meal.newMeal()
         }
     }
-}
-
-func addNewMeal() {
-    print("persist entered stuff here")
 }
 
 //struct MealListView_Previews: PreviewProvider {
