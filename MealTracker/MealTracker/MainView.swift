@@ -10,12 +10,6 @@ import SwiftUI
 struct MainView: View {
     @Binding var meals: [Meal]
     @State private var showingSheet: Bool = false
-//    @State var typeOfMeal = ""
-//    @State var mealName = ""
-//    @State var mealName = ""
-//    @State var mealName = ""
-//    @State var mealName = ""
-
     @State private var newMeal = Meal.newMeal()
     @State private var created = false
     
@@ -29,11 +23,11 @@ struct MainView: View {
             Button("Add New Meal 3", action: {
                 self.showingSheet.toggle()
             }).frame(maxHeight: 44, alignment: .bottom)
-
+            
         }
         .padding()
         .sheet(isPresented: $showingSheet) {
-            AddtMealView(meal: $newMeal, created: $created)
+            AddMealView(meal: $newMeal, created: $created)
         }
         .onChange(of: created) { created in
             if created {
@@ -55,13 +49,12 @@ func addNewMeal() {
 //    }
 //}
 
-struct AddtMealView: View {
+struct AddMealView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var meal: Meal
     @Binding var created: Bool
-
+    
     var body: some View {
-//        TextField("Select the meal type", text: $meal.typeOfMeal)
         TextField("Enter the name of the meal", text: $meal.mealName)
         Button("Press to dismiss") {
             dismiss()
@@ -70,17 +63,14 @@ struct AddtMealView: View {
             self.created = true
             dismiss()
         }
-//        .font(.title)
-//        .padding()
     }
 }
 
 struct EditMealView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var meal: Meal
-
+    
     var body: some View {
-//        TextField("Select the meal type", text: $meal.typeOfMeal)
         TextField("Enter the name of the meal", text: $meal.mealName)
         Button("Press to dismiss") {
             dismiss()
