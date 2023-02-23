@@ -28,7 +28,6 @@ struct MealRow: View {
                 EditMealView(meal:$meal)
             }
         }
-
     }
 }
 
