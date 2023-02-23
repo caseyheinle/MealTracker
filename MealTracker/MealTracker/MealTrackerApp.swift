@@ -9,24 +9,46 @@ import SwiftUI
 
 @main
 struct MealTrackerApp: App {
-    @State var meals = [Meal].exampleMeal
+    @StateObject private var meal = MealStore()
+    
     var body: some Scene {
         WindowGroup {
-            MainView(meals: $meals)
-        }
-        .onChange(of: meals) { meals in
-            print(self.meals)
+            NavigationView {
+                MainView(meals: $meal.meals) {
+                    MealStore.save(meals: meal.meals) { result in
+                        if case .failure(let error) = result {
+                            fatalError(error.localizedDescription)
+                        }
+                    }
+                }
+            }
             
+            //MainView(meals: $meal.meals)
+            
+            .onAppear {
+                MealStore.load { result in
+                    switch result {
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                    case .success(let meals):
+                        meal.meals = meals
+                    }
+                }
+            }
         }
+        //        .onChange(of: meals) { meals in
+        //            print(self.meals)
+        
     }
 }
 
+
 /*
  app
-    main view
-        …
-        meal list view
-        …
+ main view
+ …
+ meal list view
+ …
  
  server -> model
  app -> controller
