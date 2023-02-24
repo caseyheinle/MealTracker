@@ -51,8 +51,15 @@ struct AddMealView: View {
     @Binding var created: Bool
     
     var body: some View {
-        TextField("Enter the name of the meal", text: $meal.mealName)
-        DatePicker("What day did you eat it?", selection: $meal.dateOfMeal, displayedComponents: .date)
+        Section(header: Text("Enter the name of the meal")) {
+            TextField("Enter the name of the meal", text: $meal.mealName)
+                .padding()
+        }
+        Section(header: Text("What day did you eat it?")) {
+            DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
+                .padding()
+            Toggle("Finished Meal?", isOn: $meal.completedMeal)
+        }
        
         Button("Press to dismiss") {
             dismiss()
