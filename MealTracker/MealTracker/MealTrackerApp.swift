@@ -41,18 +41,3 @@ struct MealTrackerApp: App {
         
     }
 }
-
-
-/*
- app
- main view
- …
- meal list view
- …
- 
- server -> model
- app -> controller
- ui -> view
- 
- MVC
- */
