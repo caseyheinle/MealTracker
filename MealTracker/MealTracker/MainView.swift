@@ -52,6 +52,8 @@ struct AddMealView: View {
     
     var body: some View {
         TextField("Enter the name of the meal", text: $meal.mealName)
+        DatePicker("What day did you eat it?", selection: $meal.dateOfMeal, displayedComponents: .date)
+       
         Button("Press to dismiss") {
             dismiss()
         }

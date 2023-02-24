@@ -13,7 +13,7 @@ struct Meal: Identifiable, Codable, Equatable, Hashable {
     
     var typeOfMeal: MealType
     var mealName: String // I want to add what the meal was, e.g. "tortilla soup", "pizza", etc.
-    let dateOfMeal: Date // when was the meal consumed?
+    var dateOfMeal: Date // when was the meal consumed?
     // MA: decouple this thing? @same level of meal, a struct 'dish'?
     var ingredientList: [String] // I want to be able to add what ingredients were in the meal
     // MA: perhaps a % rather than yes/no I ate all
