@@ -51,6 +51,13 @@ struct AddMealView: View {
     @Binding var created: Bool
     
     var body: some View {
+        Section(header: Text("Select the meal type")) {
+            Picker("Select the meal type", selection: $meal.typeOfMeal) {
+                ForEach(MealType.allCases, id: \.self) {mealType in
+                    Text(mealType.rawValue)
+                }
+            }
+        }
         Section(header: Text("Enter the name of the meal")) {
             TextField("Enter the name of the meal", text: $meal.mealName)
                 .padding()

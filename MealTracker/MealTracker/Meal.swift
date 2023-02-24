@@ -45,7 +45,7 @@ extension Array where Element == Meal {
     }
 }
 
-public enum MealType: String, Codable {
+public enum MealType: String, Codable, CaseIterable {
     case Breakfast
     case MorningSnack
     case Lunch
