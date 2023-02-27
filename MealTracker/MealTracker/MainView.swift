@@ -40,8 +40,8 @@ struct MainView: View {
             self.newMeal = Meal.newMeal()
         }
         .onChange(of: scenePhase) { phase in
-                    if phase == .inactive { saveAction() }
-                }
+            if phase == .inactive { saveAction() }
+        }
     }
 }
 
@@ -51,31 +51,31 @@ struct AddMealView: View {
     @Binding var created: Bool
     
     var body: some View {
-            Section(header: Text("Select the meal type")) {
-                Picker("Select the meal type", selection: $meal.typeOfMeal) {
-                    ForEach(MealType.allCases, id: \.self) {mealType in
-                        Text(mealType.rawValue)
-                    }
+        Section(header: Text("Select the meal type")) {
+            Picker("Select the meal type", selection: $meal.typeOfMeal) {
+                ForEach(MealType.allCases, id: \.self) {mealType in
+                    Text(mealType.rawValue)
                 }
             }
-            Section(header: Text("Enter the name of the meal")) {
-                TextField("Enter the name of the meal", text: $meal.mealName)
-            }
-            Section(header: Text("What day did you eat it?")) {
-                DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
-                    .padding()
-                Toggle("Finished Meal?", isOn: $meal.completedMeal)
-                Spacer()
-            }
-            
-            Button("Press to dismiss") {
-                dismiss()
-            }
-            Button("CREATE") {
-                self.created = true
-                dismiss()
-            }
         }
+        Section(header: Text("Enter the name of the meal")) {
+            TextField("Enter the name of the meal", text: $meal.mealName)
+        }
+        Section(header: Text("What day did you eat it?")) {
+            DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
+                .padding()
+            Toggle("Finished Meal?", isOn: $meal.completedMeal)
+            Spacer()
+        }
+        
+        Button("Press to dismiss") {
+            dismiss()
+        }
+        Button("CREATE") {
+            self.created = true
+            dismiss()
+        }
+    }
 }
 
 struct EditMealView: View {
@@ -89,6 +89,9 @@ struct EditMealView: View {
                     Text(mealType.rawValue)
                 }
             }
+        }
+        ForEach(meal.ingredientList, id: \.self) { ingredient in
+            Text(ingredient)
         }
         Section(header: Text("Edit the name of the meal")) {
             TextField("Edit the name of the meal", text: $meal.mealName)
@@ -104,6 +107,9 @@ struct EditMealView: View {
         }
         .font(.title)
         .padding()
+        Button("Press to dismiss") {
+            dismiss()
+        }
     }
 }
 
