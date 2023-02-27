@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Binding var meals: [Meal]
     @State private var showingSheet: Bool = false
+    @State private var showingIngredientsSheet: Bool = false
     @State private var newMeal = Meal.newMeal()
     @State private var created = false
     @Environment(\.scenePhase) private var scenePhase
@@ -29,7 +30,7 @@ struct MainView: View {
         }
         .padding()
         .sheet(isPresented: $showingSheet) {
-            AddMealView(meal: $newMeal, created: $created)
+            AddMealView(meal: $newMeal, created: $created, isSheetPresented: $showingIngredientsSheet)
         }
         .onChange(of: created) { created in
             if created {
@@ -49,6 +50,7 @@ struct AddMealView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var meal: Meal
     @Binding var created: Bool
+    @Binding var isSheetPresented: Bool
     
     var body: some View {
         Section(header: Text("Select the meal type")) {
@@ -61,6 +63,17 @@ struct AddMealView: View {
         Section(header: Text("Enter the name of the meal")) {
             TextField("Enter the name of the meal", text: $meal.mealName)
         }
+        Section(header: Text("Ingredients")) {
+            List($meal.ingredientList, id:\.self) {$ingredient in
+                Text(ingredient)
+            }
+            Button("Add Ingredients") {
+                isSheetPresented = true
+            }
+            .sheet(isPresented: $isSheetPresented) {
+                AddIngredientSheetView(isSheetPresented: $isSheetPresented, meal: $meal)
+            }
+        }
         Section(header: Text("What day did you eat it?")) {
             DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
                 .padding()
@@ -71,7 +84,7 @@ struct AddMealView: View {
         Button("Press to dismiss") {
             dismiss()
         }
-        Button("CREATE") {
+        Button("Add Meal") {
             self.created = true
             dismiss()
         }
@@ -113,6 +126,23 @@ struct EditMealView: View {
     }
 }
 
+struct AddIngredientSheetView: View {
+    @State var newIngredient: String = ""
+    @Binding var isSheetPresented: Bool
+    @Binding var meal: Meal
+    
+    var body: some View {
+        VStack {
+            TextField("Enter ingredient: ", text: $newIngredient)
+                .padding()
+            Button("Add Ingredient") {
+                meal.ingredientList.append(newIngredient)
+                    isSheetPresented = false
+            }
+            .padding()
+        }
+    }
+}
 
 //struct Previews_MainView_Previews: PreviewProvider {
 //    static var previews: some View {
