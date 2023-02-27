@@ -51,31 +51,31 @@ struct AddMealView: View {
     @Binding var created: Bool
     
     var body: some View {
-        Section(header: Text("Select the meal type")) {
-            Picker("Select the meal type", selection: $meal.typeOfMeal) {
-                ForEach(MealType.allCases, id: \.self) {mealType in
-                    Text(mealType.rawValue)
+            Section(header: Text("Select the meal type")) {
+                Picker("Select the meal type", selection: $meal.typeOfMeal) {
+                    ForEach(MealType.allCases, id: \.self) {mealType in
+                        Text(mealType.rawValue)
+                    }
                 }
             }
+            Section(header: Text("Enter the name of the meal")) {
+                TextField("Enter the name of the meal", text: $meal.mealName)
+            }
+            Section(header: Text("What day did you eat it?")) {
+                DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
+                    .padding()
+                Toggle("Finished Meal?", isOn: $meal.completedMeal)
+                Spacer()
+            }
+            
+            Button("Press to dismiss") {
+                dismiss()
+            }
+            Button("CREATE") {
+                self.created = true
+                dismiss()
+            }
         }
-        Section(header: Text("Enter the name of the meal")) {
-            TextField("Enter the name of the meal", text: $meal.mealName)
-                .padding()
-        }
-        Section(header: Text("What day did you eat it?")) {
-            DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
-                .padding()
-            Toggle("Finished Meal?", isOn: $meal.completedMeal)
-        }
-       
-        Button("Press to dismiss") {
-            dismiss()
-        }
-        Button("CREATE") {
-            self.created = true
-            dismiss()
-        }
-    }
 }
 
 struct EditMealView: View {
@@ -83,8 +83,23 @@ struct EditMealView: View {
     @Binding var meal: Meal
     
     var body: some View {
-        TextField("Edit the name of the meal", text: $meal.mealName)
-        Button("Press to dismiss") {
+        Section(header: Text("Edit the meal type")) {
+            Picker("Edit the meal type", selection: $meal.typeOfMeal) {
+                ForEach(MealType.allCases, id: \.self) {mealType in
+                    Text(mealType.rawValue)
+                }
+            }
+        }
+        Section(header: Text("Edit the name of the meal")) {
+            TextField("Edit the name of the meal", text: $meal.mealName)
+        }
+        Section(header: Text("Edit the day you ate it")) {
+            DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
+                .padding()
+            Toggle("Finished Meal?", isOn: $meal.completedMeal)
+            Spacer()
+        }
+        Button("Save Changes") {
             dismiss()
         }
         .font(.title)
@@ -92,10 +107,9 @@ struct EditMealView: View {
     }
 }
 
-//struct MainView_Previews: PreviewProvider {
+
+//struct Previews_MainView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        NavigationView {
-//            MealList(meals: meals.exampleMeal, saveAction: {})
-//        }
+//        //MainView(meals: $MealList, saveAction: {})
 //    }
 //}
