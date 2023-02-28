@@ -30,7 +30,7 @@ struct Meal: Identifiable, Codable, Equatable, Hashable {
     static let `default` = Meal(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
     static let `default1` = Meal(MealType.Breakfast, mealName: "eggs", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
     static func newMeal() -> Meal {
-        Meal(MealType.Breakfast, mealName: "hsm", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
+        Meal(MealType.Breakfast, mealName: "", dateOfMeal: Date(), ingredientList: [], completedMeal: true)
     }
 }
 
