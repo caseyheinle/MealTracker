@@ -39,8 +39,7 @@ extension Array where Element == Meal {
     static var exampleMeal: Self {
         [
             .default,
-//            .default1,
-//            .default2
+            .default1,
         ]
     }
 }
@@ -52,4 +51,22 @@ public enum MealType: String, Codable, CaseIterable {
     case AfternoonSnack
     case Dinner
     case Dessert
+    
+    var name: String {
+        switch self {
+            
+        case .Breakfast:
+            return "Breakfast"
+        case .MorningSnack:
+            return "Morning Snack"
+        case .Lunch:
+            return "Lunch"
+        case .AfternoonSnack:
+            return "Afternoon Snack"
+        case .Dinner:
+            return "Dinner"
+        case .Dessert:
+            return "Dessert"
+        }
+    }
 }

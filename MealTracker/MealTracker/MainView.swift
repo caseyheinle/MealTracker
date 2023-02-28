@@ -56,7 +56,7 @@ struct AddMealView: View {
         Section(header: Text("Select the meal type")) {
             Picker("Select the meal type", selection: $meal.typeOfMeal) {
                 ForEach(MealType.allCases, id: \.self) {mealType in
-                    Text(mealType.rawValue)
+                    Text(mealType.name)
                 }
             }
         }
@@ -99,7 +99,7 @@ struct EditMealView: View {
         Section(header: Text("Edit the meal type").font(.title)) {
             Picker("Edit the meal type", selection: $meal.typeOfMeal) {
                 ForEach(MealType.allCases, id: \.self) {mealType in
-                    Text(mealType.rawValue)
+                    Text(mealType.name)
                 }
             }
         }
@@ -133,7 +133,7 @@ struct AddIngredientSheetView: View {
     
     var body: some View {
         VStack {
-            TextField("Enter ingredient: ", text: $newIngredient)
+            TextField("Ingredient ", text: $newIngredient)
                 .padding()
             Button("Add Ingredient") {
                 meal.ingredientList.append(newIngredient)
