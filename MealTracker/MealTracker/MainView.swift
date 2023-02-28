@@ -61,7 +61,7 @@ struct AddMealView: View {
             }
         }
         Section(header: Text("Enter the name of the meal")) {
-            TextField("Meal name", text: $meal.mealName)
+            TextField("Meal name", text: $meal.mealName).textFieldStyle(RoundedBorderTextFieldStyle())
         }
         Section(header: Text("Ingredients")) {
             List($meal.ingredientList, id:\.self) {$ingredient in
@@ -96,7 +96,7 @@ struct EditMealView: View {
     @Binding var meal: Meal
     
     var body: some View {
-        Section(header: Text("Edit the meal type")) {
+        Section(header: Text("Edit the meal type").font(.title)) {
             Picker("Edit the meal type", selection: $meal.typeOfMeal) {
                 ForEach(MealType.allCases, id: \.self) {mealType in
                     Text(mealType.rawValue)
@@ -107,7 +107,7 @@ struct EditMealView: View {
             Text(ingredient)
         }
         Section(header: Text("Edit the name of the meal")) {
-            TextField("Edit the name of the meal", text: $meal.mealName)
+            TextField("Edit the name of the meal", text: $meal.mealName).textFieldStyle(RoundedBorderTextFieldStyle())
         }
         Section(header: Text("Edit the day you ate it")) {
             DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
@@ -144,8 +144,8 @@ struct AddIngredientSheetView: View {
     }
 }
 
-//struct Previews_MainView_Previews: PreviewProvider {
+//struct Previews_MainView: PreviewProvider {
 //    static var previews: some View {
-//        //MainView(meals: $MealList, saveAction: {})
+//        MainView(meals: $meals, saveAction: {})
 //    }
 //}
