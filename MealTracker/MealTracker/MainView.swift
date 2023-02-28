@@ -61,7 +61,7 @@ struct AddMealView: View {
             }
         }
         Section(header: Text("Enter the name of the meal")) {
-            TextField("Enter the name of the meal", text: $meal.mealName)
+            TextField("Meal name", text: $meal.mealName)
         }
         Section(header: Text("Ingredients")) {
             List($meal.ingredientList, id:\.self) {$ingredient in
@@ -137,7 +137,7 @@ struct AddIngredientSheetView: View {
                 .padding()
             Button("Add Ingredient") {
                 meal.ingredientList.append(newIngredient)
-                    isSheetPresented = false
+                isSheetPresented = false
             }
             .padding()
         }
