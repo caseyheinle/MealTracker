@@ -17,6 +17,7 @@ struct MainView: View {
     let saveAction: ()->Void
     
     var body: some View {
+        let _ = Self._printChanges() //debug
         VStack {
             Image(systemName: "fork.knife")
                 .imageScale(.large)
@@ -103,8 +104,11 @@ struct EditMealView: View {
                 }
             }
         }
-        ForEach(meal.ingredientList, id: \.self) { ingredient in
-            Text(ingredient)
+
+        List {
+            ForEach($meal.ingredientList, id: \.self) { ingredient in
+                TextField("Edit the ingredients", text: ingredient)
+            }
         }
         Section(header: Text("Edit the name of the meal")) {
             TextField("Edit the name of the meal", text: $meal.mealName).textFieldStyle(RoundedBorderTextFieldStyle())
