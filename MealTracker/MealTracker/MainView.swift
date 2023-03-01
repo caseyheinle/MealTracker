@@ -104,14 +104,15 @@ struct EditMealView: View {
                 }
             }
         }
-
-        List {
-            ForEach($meal.ingredientList, id: \.self) { ingredient in
-                TextField("Edit the ingredients", text: ingredient)
-            }
-        }
         Section(header: Text("Edit the name of the meal")) {
             TextField("Edit the name of the meal", text: $meal.mealName).textFieldStyle(RoundedBorderTextFieldStyle())
+        }
+        Section(header: Text("Edit the ingredients in the meal")) {
+            List {
+                ForEach($meal.ingredientList, id: \.self) { ingredient in
+                    TextField("Edit the ingredients", text: ingredient)
+                }
+            }
         }
         Section(header: Text("Edit the day you ate it")) {
             DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
@@ -126,6 +127,7 @@ struct EditMealView: View {
         .padding()
         Button("Press to dismiss") {
             dismiss()
+            
         }
     }
 }
