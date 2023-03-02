@@ -18,8 +18,10 @@ struct MealRow: View {
             ForEach(meal.ingredientList, id: \.self) { ingredient in
                 Text(ingredient)
             }
+            Text(meal.intention)
             Text(formatDate(date: meal.dateOfMeal))
             Text(meal.completedMeal ? "True": "False")
+            Text("\(meal.satiation)")
             Button("Edit", action: {
                 self.editing.toggle()
                 

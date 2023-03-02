@@ -17,20 +17,25 @@ struct Meal: Identifiable, Codable, Equatable, Hashable {
     // MA: decouple this thing? @same level of meal, a struct 'dish'?
     var ingredientList: [String] // I want to be able to add what ingredients were in the meal
     // MA: perhaps a % rather than yes/no I ate all
+    var intention: String // what was the intention during the meal? Intention examples: appreciating the different meal textures, not eating while distracted, etc.
     var completedMeal: Bool // was the meal completed, or was there food remaining on the plate
+    var satiation: Double // how hungry are you after finishing the meal?
     
-    init(_ typeOfMeal: MealType, mealName: String, dateOfMeal: Date, ingredientList: [String], completedMeal: Bool) {
+    init(_ typeOfMeal: MealType, mealName: String, dateOfMeal: Date, ingredientList: [String], intention: String, completedMeal: Bool, satiation: Double) {
         self.typeOfMeal = MealType.Breakfast
         self.mealName = mealName
         self.ingredientList = ingredientList
+        self.intention = intention
         self.dateOfMeal = Date()
         self.completedMeal = completedMeal
+        self.satiation = satiation
     }
     
-    static let `default` = Meal(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
-    static let `default1` = Meal(MealType.Breakfast, mealName: "eggs", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], completedMeal: true)
+    static let `default` = Meal(MealType.Breakfast, mealName: "oatmeal", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], intention: "Not be on my phone while eating", completedMeal: true, satiation: 9)
+    static let `default1` = Meal(MealType.Breakfast, mealName: "eggs", dateOfMeal: Date(), ingredientList: ["milk", "steel cut oatmeal", "strawberries", "brown sugar", "cinnamon"], intention: "Taste the cinnamon and sweetness of the berries", completedMeal: true, satiation: 7)
+
     static func newMeal() -> Meal {
-        Meal(MealType.Breakfast, mealName: "", dateOfMeal: Date(), ingredientList: [], completedMeal: true)
+        Meal(MealType.Breakfast, mealName: "", dateOfMeal: Date(), ingredientList: [], intention: "", completedMeal: true, satiation: 0)
     }
 }
 
@@ -70,3 +75,4 @@ public enum MealType: String, Codable, CaseIterable {
         }
     }
 }
+

@@ -75,11 +75,22 @@ struct AddMealView: View {
                 AddIngredientSheetView(isSheetPresented: $isSheetPresented, meal: $meal)
             }
         }
+        Section(header: Text("Intention")) {
+            TextField("What was your intention during this meal?", text: $meal.intention).textFieldStyle(RoundedBorderTextFieldStyle())
+        }
         Section(header: Text("What day did you eat it?")) {
             DatePicker("", selection: $meal.dateOfMeal, displayedComponents: .date)
                 .padding()
             Toggle("Finished Meal?", isOn: $meal.completedMeal)
             Spacer()
+        }
+        Section(header: Text("How full are you?")) {
+            VStack {
+                Slider(value: $meal.satiation, in: 0...10, step: 1)
+                Text("\(meal.satiation, specifier: "%.1f")")
+                
+            }
+            
         }
         
         Button("Press to dismiss") {
@@ -91,6 +102,7 @@ struct AddMealView: View {
         }
     }
 }
+
 
 struct EditMealView: View {
     @Environment(\.dismiss) var dismiss
@@ -127,7 +139,6 @@ struct EditMealView: View {
         .padding()
         Button("Press to dismiss") {
             dismiss()
-            
         }
     }
 }
