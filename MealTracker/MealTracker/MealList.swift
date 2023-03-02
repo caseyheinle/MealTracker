@@ -20,3 +20,10 @@ struct MealList: View {
     }
 }
 
+
+//struct MealList_Previews: PreviewProvider {
+//    @Binding var meals: [Meal]
+//    static var previews: some View {
+//        MealList(meals: $meals)
+//    }
+//}

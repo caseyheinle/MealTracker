@@ -23,8 +23,6 @@ struct MealTrackerApp: App {
                 }
             }
             
-            //MainView(meals: $meal.meals)
-            
             .onAppear {
                 MealStore.load { result in
                     switch result {
@@ -36,8 +34,5 @@ struct MealTrackerApp: App {
                 }
             }
         }
-        //        .onChange(of: meals) { meals in
-        //            print(self.meals)
-        
     }
 }
