@@ -89,11 +89,8 @@ struct AddMealView: View {
             VStack {
                 Slider(value: $meal.satiation, in: 0...10, step: 1)
                 Text("\(meal.satiation, specifier: "%.1f")")
-                
             }
-            
         }
-        
         Button("Press to dismiss") {
             dismiss()
         }
@@ -104,12 +101,19 @@ struct AddMealView: View {
     }
 }
 
-
 struct EditMealView: View {
+    // used for a hack to get focus on the ingredientList TextField during the edit experience
+    enum FocusField: Hashable {
+        case field
+    }
+    
     @Environment(\.dismiss) var dismiss
     @Binding var meal: Meal
+    @FocusState var focused: FocusField?
     
     var body: some View {
+        let _ = Self._printChanges() //debug
+        
         Section(header: Text("Edit the meal type").font(.title)) {
             Picker("Edit the meal type", selection: $meal.typeOfMeal) {
                 ForEach(MealType.allCases, id: \.self) {mealType in
@@ -122,8 +126,15 @@ struct EditMealView: View {
         }
         Section(header: Text("Edit the ingredients in the meal")) {
             List {
-                ForEach($meal.ingredientList, id: \.self) { ingredient in
-                    TextField("Edit the ingredients", text: ingredient)
+                ForEach($meal.ingredientList, id: \.self) { $ingredient in
+                    TextField("Edit the ingredients", text: $ingredient.text)
+                    // a shameful hack, but it works for now
+                        .focused($focused, equals: .field)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                                self.focused = .field
+                            }
+                        }
                 }
             }
         }
