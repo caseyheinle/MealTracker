@@ -16,7 +16,7 @@ struct MealRow: View {
             Text(meal.typeOfMeal.rawValue)
             Text(meal.mealName)
             ForEach(meal.ingredientList, id: \.self) { ingredient in
-                Text(ingredient)
+                Text(ingredient.text)
             }
             Text(meal.intention)
             Text(formatDate(date: meal.dateOfMeal))
