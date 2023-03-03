@@ -66,7 +66,7 @@ struct AddMealView: View {
         }
         Section(header: Text("Ingredients")) {
             List($meal.ingredientList, id:\.self) {$ingredient in
-                Text(ingredient)
+                Text(ingredient.text)
             }
             Button("Add Ingredients") {
                 isSheetPresented = true
@@ -148,12 +148,15 @@ struct AddIngredientSheetView: View {
     @Binding var isSheetPresented: Bool
     @Binding var meal: Meal
     
+    
+    
     var body: some View {
         VStack {
             TextField("Ingredient ", text: $newIngredient)
                 .padding()
             Button("Add Ingredient") {
-                meal.ingredientList.append(newIngredient)
+                let ingredient = Ingredients(text: newIngredient)
+                meal.ingredientList.append(ingredient)
                 isSheetPresented = false
             }
             .padding()
