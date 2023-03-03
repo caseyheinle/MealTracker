@@ -14,7 +14,7 @@ struct MealTrackerApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                MainView(meals: $meal.meals) {
+                MainView(mealStore: meal) {
                     MealStore.save(meals: meal.meals) { result in
                         if case .failure(let error) = result {
                             fatalError(error.localizedDescription)

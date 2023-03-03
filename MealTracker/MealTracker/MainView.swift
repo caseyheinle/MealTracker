@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @Binding var meals: [Meal]
+    @ObservedObject var mealStore: MealStore
     @State private var showingSheet: Bool = false
     @State private var showingIngredientsSheet: Bool = false
     @State private var newMeal = Meal.newMeal()
@@ -18,12 +18,13 @@ struct MainView: View {
     
     var body: some View {
         let _ = Self._printChanges() //debug
+        
         VStack {
             Image(systemName: "fork.knife")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Welcome to Meal Tracker!")
-            MealList(meals: $meals)
+            MealList(meals: $mealStore.meals)
             Button("Add New Meal", action: {
                 self.showingSheet.toggle()
             }).frame(maxHeight: 44, alignment: .bottom)
@@ -35,7 +36,7 @@ struct MainView: View {
         }
         .onChange(of: created) { created in
             if created {
-                self.meals.append(self.newMeal)
+                self.mealStore.meals.append(self.newMeal)
             }
             
             self.created = false
